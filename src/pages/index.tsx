@@ -1,10 +1,10 @@
 // SSG
-import { GetStaticProps } from 'next';
+import { GetStaticProps, GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { api } from '../services/api';
-import { prototype } from 'node:events';
+
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString';
@@ -36,9 +36,7 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
         <h2>Últimos lançamentos</h2>
 
         <ul>
-          {latestEpisodes.map(episode => {
-            return (
-
+          {latestEpisodes.map(episode => (
               <li key={episode.id}>
                 <Image 
                   width={192} 
@@ -47,8 +45,7 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
                   alt={episode.title} 
                   objectFit="cover"
                 />
-                <a href="">{episode.title}</a> 
-
+                
                 <div className={styles.episodeDetails}>
                   <Link href={`/episodes/${episode.id}`}>{episode.title}</Link>
                   <p>{episode.members}</p>
@@ -61,8 +58,7 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
                 </button>
               </li>
 
-            )
-          })}
+            ))}
         </ul>
 
       </section>
